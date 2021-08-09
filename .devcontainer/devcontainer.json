@@ -2,31 +2,58 @@
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.187.0/containers/docker-existing-dockerfile
 {
 	"name": "SparkEngine",
-
 	// Sets the run context to one level up instead of the .devcontainer folder.
 	"context": "..",
-
 	// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
-	"dockerFile": "../Dockerfile",
-
+	"dockerFile": "Dockerfile",
 	// Set *default* container specific settings.json values on container create.
-	"settings": {},
-
+	"settings": {
+		"python.linting.flake8Enabled": true,
+		"python.linting.enabled": true,
+		"python.linting.flake8Args": [
+			"--max-line-length=280",
+			"--ignore=E203, W503"
+		],
+		"python.testing.pytestArgs": [
+			"tests"
+		],
+		"python.testing.unittestEnabled": false,
+		"python.testing.nosetestsEnabled": false,
+		"python.testing.pytestEnabled": true,
+		"python.formatting.provider": "black",
+		"python.formatting.blackPath": "/usr/local/bin/black",
+		"editor.formatOnSave": true,
+		"files.autoSave": "afterDelay",
+		"files.autoSaveDelay": 1000,
+		"files.exclude": {
+			"**/.git": true,
+			"**/.svn": true,
+			"**/.hg": true,
+			"**/CVS": true,
+			"**/.DS_Store": true,
+			"**/*.pyc": true,
+			"**/__pycache__": true,
+			"**/.pytest_cache": true
+		}
+	},
 	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": []
-
+	"extensions": [
+		"coenraads.bracket-pair-colorizer",
+		"donjayamanne.git-extension-pack",
+		"mhutchie.git-graph",
+		"ms-toolsai.jupyter",
+		"ms-python.vscode-pylance",
+		"ms-python.python",
+		"littlefoxteam.vscode-python-test-adapter"
+	]
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
-
 	// Uncomment the next line to run commands after the container is created - for example installing curl.
 	// "postCreateCommand": "apt-get update && apt-get install -y curl",
-
 	// Uncomment when using a ptrace-based debugger like C++, Go, and Rust
 	// "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
-
 	// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
 	// "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],
-
 	// Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
 	// "remoteUser": "vscode"
 }
